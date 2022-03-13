@@ -1,7 +1,10 @@
-import React from 'react';
-import { Text, View, Image, StyleSheet, ScrollView} from 'react-native';
+import React, { useState } from 'react';
+import { TouchableOpacity, Animated, Text, View, Image, StyleSheet, ScrollView} from 'react-native';
 
 const App = () => {
+    const [count, setCount] = useState(0);
+    const onPress = () => setCount(prevCount => prevCount + 1);
+
     return (
         <View style={styles.main}>
             <View style={styles.header}>
@@ -12,7 +15,9 @@ const App = () => {
             </View>
 
             <View style={styles.body} >
-                <Text style={{ fontWeight: 'bold', textAlign: 'center', borderWidth: 1}}> Description </Text>
+                <Text style={{ fontWeight: 'bold', textAlign: 'center', borderWidth: 1}}>
+                    Description : {count}
+                </Text>
                 <View style={{ flex: 1, borderWidth: 1 }}>
                     <Image
                         source={require("./assets/lasagnes.jpg")}
@@ -127,7 +132,13 @@ const App = () => {
             </View>
 
             <View style={styles.footer}>
-
+                <TouchableOpacity style={styles.buttonDesign} onPress={onPress}>
+                    {/*<Text>Press me</Text>*/}
+                    <Image
+                        source={require('./assets/addButton.png')}
+                        style={styles.buttonImage}
+                    />
+                </TouchableOpacity>
             </View>
         </View>
     );
@@ -176,6 +187,18 @@ const styles = StyleSheet.create({
     },
     footer:{
         flex:1,
-        backgroundColor: '#FDE0DC'
+        backgroundColor: '#FDE0DC',
+        borderWidth: 1,
+        alignItems: 'center'
+    },
+    buttonDesign: {
+        width: "9%",
+        height: "50%",
+        marginTop: "5%" // bad need to be improve
+    },
+    buttonImage: {
+        resizeMode: 'contain',
+        width: '100%',
+        height: '100%'
     },
 });
