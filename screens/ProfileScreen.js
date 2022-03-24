@@ -6,9 +6,6 @@ import {auth} from "../firebase";
 const ProfileScreen = () => {
     const navigation = useNavigation();
 
-    const imageUrl_imageChapeau = "https://sizze-figma-plugin-images-upload.s3.us-east-2.amazonaws.com/f9facc57556d8f8e2d5f3b0f2d735fa7"
-    const imageUrl_image_4_2 = "https://sizze-figma-plugin-images-upload.s3.us-east-2.amazonaws.com/78b82c822ee6f07f9fa6267bb95e09c1"
-
     const handleSignOut = () => {
         auth
             .signOut()
@@ -26,13 +23,13 @@ const ProfileScreen = () => {
         <View style={styles.container}>
 
             <View style={{flex: 1.5, alignItems:"center"}}>
-                <Image style = {styles.imageLogo} source = {{uri: imageUrl_image_4_2}}>
+                <Image style = {styles.imageLogo} source={require("../images/appLogo.png")}>
                 </Image>
             </View>
 
             <View style={{backgroundColor: "rgb(255, 248, 242)", flex: 0.5, justifyContent:'space-around', alignItems:"center"}}>
                 <Text style={{fontSize:25}}>Mon Profil</Text>
-                <Image style = {styles.imageChapeau} source = {{uri: imageUrl_imageChapeau}}>
+                <Image style = {styles.imageChapeau} source={require("../images/chapeau.jpg")}>
                 </Image>
             </View>
 
