@@ -22,18 +22,21 @@ const ProfileScreen = () => {
     return (
         <View style={styles.container}>
 
-            <View style={{flex: 1.5, alignItems:"center"}}>
-                <Image style = {styles.imageLogo} source={require("../images/appLogo.png")}>
+            <View style={styles.header}>
+                <Image style = {styles.logoImg} source={require("../images/appLogo.png")}>
                 </Image>
             </View>
 
-            <View style={{backgroundColor: "rgb(255, 248, 242)", flex: 0.5, justifyContent:'space-around', alignItems:"center"}}>
+            <View style={styles.myProfile}>
                 <Text style={{fontSize:25}}>Mon Profil</Text>
                 <Image style = {styles.imageChapeau} source={require("../images/chapeau.jpg")}>
                 </Image>
             </View>
 
-            <View style={{flex: 2, alignItems:"center",marginTop:50}}>
+            <View style={styles.body}>
+
+                <Text style={{marginBottom: 50, fontSize:18}}>Email: {auth.currentUser?.email}</Text>
+
                 <View style={styles.button_themeBasic}>
                     <Button
                         title="Mes recettes"
@@ -65,6 +68,18 @@ const styles = StyleSheet.create ({
         backgroundColor:"rgb(253, 224, 220)"
     },
 
+    header: {
+        flex: 1.5,
+        alignItems:"center"
+    },
+
+    myProfile: {
+        backgroundColor: "rgb(255, 248, 242)",
+        flex: 0.5,
+        justifyContent:'space-around',
+        alignItems:"center"
+    },
+
     imageChapeau: {
         position: "absolute",
         width: 26,
@@ -72,9 +87,15 @@ const styles = StyleSheet.create ({
         right:"10%",
     },
 
-    imageLogo: {
+    logoImg: {
         width: '100%',
         height:'100%',
+    },
+
+    body: {
+        flex: 2,
+        alignItems:"center",
+        marginTop:50
     },
 
     button_themeBasic: {
