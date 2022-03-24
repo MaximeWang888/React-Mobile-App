@@ -1,12 +1,22 @@
 import React from "react";
 import { View, Text, Image, StyleSheet, Button } from "react-native";
 import {useNavigation} from "@react-navigation/core";
+import {auth} from "../firebase";
 
 const ProfileScreen = () => {
     const navigation = useNavigation();
 
     const imageUrl_imageChapeau = "https://sizze-figma-plugin-images-upload.s3.us-east-2.amazonaws.com/f9facc57556d8f8e2d5f3b0f2d735fa7"
     const imageUrl_image_4_2 = "https://sizze-figma-plugin-images-upload.s3.us-east-2.amazonaws.com/78b82c822ee6f07f9fa6267bb95e09c1"
+
+    const handleSignOut = () => {
+        auth
+            .signOut()
+            .then(() => {
+                navigation.replace("Login")
+            })
+            .catch(error => alert(error.message))
+    }
 
     const handleNavigate2Home = () => {
         navigation.replace("Home")
@@ -39,6 +49,7 @@ const ProfileScreen = () => {
                     <Button
                         title="Déconnexion"
                         color="black"
+                        onPress={handleSignOut}
                     />
                 </View>
             </View>

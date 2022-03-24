@@ -9,14 +9,7 @@ const HomeScreen = () => {
     const [count, setCount] = useState(0);
     const onPress = () => setCount(prevCount => prevCount + 1);
 
-    const handleSignOut = () => {
-    auth
-      .signOut()
-      .then(() => {
-        navigation.replace("Login")
-      })
-      .catch(error => alert(error.message))
-    }
+
 
     const handleNavigate2Profile = () => {
         navigation.replace("Profile")
