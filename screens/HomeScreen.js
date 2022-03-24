@@ -18,6 +18,10 @@ const HomeScreen = () => {
       .catch(error => alert(error.message))
     }
 
+    const handleNavigate2Profile = () => {
+        navigation.replace("Profile")
+    }
+
     return (
         <KeyboardAvoidingView
             style={styles.container}
@@ -28,10 +32,15 @@ const HomeScreen = () => {
                     source={require("../images/appLogo.png")}
                     style={styles.logoImg}
                 />
-                <Image
-                    source={require("../images/profilImg.png")}
-                    style={styles.profilImg}
-                />
+                <TouchableOpacity
+                    onPress={handleNavigate2Profile}
+                    style={styles.button}
+                >
+                    <Image
+                        source={require("../images/profilImg.png")}
+                        style={styles.profilImg}
+                    />
+                </TouchableOpacity>
             </View>
 
             <View style={styles.body} >
@@ -102,15 +111,22 @@ const styles = StyleSheet.create({
         left: 42,
         bottom: 5
     },
+    button: {
+        width: '20%',
+        borderRadius: 100,
+        height: "50%",
+        position: "absolute",
+        right: 15,
+        top: 40
+    },
     profilImg: {
         flex:1,
-        width: "10%",
-        height:"35%",
+        width: "100%",
+        height:"100%",
         borderRadius:100,
         resizeMode: "contain",
         position:"absolute",
-        left:300,
-        bottom:20
+        bottom:0
     },
     body:{
         flex:6,
@@ -150,6 +166,7 @@ const styles = StyleSheet.create({
         flex:1,
         backgroundColor: '#FDE0DC',
     },
+
     buttonDesign: {
         marginTop:20
     },
