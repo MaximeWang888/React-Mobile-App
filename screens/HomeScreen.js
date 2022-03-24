@@ -7,9 +7,8 @@ import {ScrollView} from "react-native-web";
 const HomeScreen = () => {
     const navigation = useNavigation();
     const [count, setCount] = useState(0);
+
     const onPress = () => setCount(prevCount => prevCount + 1);
-
-
 
     const handleNavigate2Profile = () => {
         navigation.replace("Profile")
@@ -30,7 +29,7 @@ const HomeScreen = () => {
                     style={styles.button}
                 >
                     <Image
-                        source={require("../images/profilImg.png")}
+                        source={require("../images/account.png")}
                         style={styles.profilImg}
                     />
                 </TouchableOpacity>
@@ -64,8 +63,6 @@ const HomeScreen = () => {
                 {/*    </View>*/}
                 {/*</View>*/}
 
-                {/*<View style={styles.footer}>*/}
-                {/*</View>*/}
             </View>
 
             <View style={styles.footer}>
@@ -115,11 +112,12 @@ const styles = StyleSheet.create({
     profilImg: {
         flex:1,
         width: "100%",
-        height:"100%",
+        height:"80%",
         borderRadius:100,
         resizeMode: "contain",
         position:"absolute",
-        bottom:0
+        bottom:0,
+        left:10
     },
     body:{
         flex:6,
