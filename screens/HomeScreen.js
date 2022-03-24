@@ -35,9 +35,9 @@ const HomeScreen = () => {
             </View>
 
             <View style={styles.body} >
-                {/*<Text style={{ fontWeight: 'bold', textAlign: 'center', borderWidth: 1}}>*/}
-                {/*    Description : {count}*/}
-                {/*</Text>*/}
+                <Text style={styles.title}>
+                    Description : {count}
+                </Text>
                 {/*<View style={{ flex: 1, borderWidth: 1, height:"100%", weight:"100%" }}>*/}
                 {/*    <Image*/}
                 {/*        source={require("../images/lasagnes.jpg")}*/}
@@ -115,6 +115,13 @@ const styles = StyleSheet.create({
     body:{
         flex:6,
         backgroundColor: "rgb(255,248,242)",
+    },
+    title: {
+        textAlign: 'center',
+        borderWidth: 1,
+        height: "10%",
+        textAlignVertical: "center",
+        fontSize: 20
     },
     article1:{
         height: "100%",
