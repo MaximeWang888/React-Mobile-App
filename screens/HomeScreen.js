@@ -28,6 +28,10 @@ const HomeScreen = () => {
                     source={require("../images/appLogo.png")}
                     style={styles.logoImg}
                 />
+                <Image
+                    source={require("../images/profilImg.png")}
+                    style={styles.profilImg}
+                />
             </View>
 
             <View style={styles.body} >
@@ -86,13 +90,27 @@ const styles = StyleSheet.create({
     header:{
         flex:1.2,
         backgroundColor:'#FDE0DC',
-        alignItems: 'center'
+        alignItems: 'center',
+        flexDirection: "row",
     },
     logoImg:{
         width: "80%",
         height: "80%",
         resizeMode: 'contain',
-        marginTop: 20
+        flex:1.5,
+        position: "absolute",
+        left: 42,
+        bottom: 5
+    },
+    profilImg: {
+        flex:1,
+        width: "10%",
+        height:"35%",
+        borderRadius:100,
+        resizeMode: "contain",
+        position:"absolute",
+        left:300,
+        bottom:20
     },
     body:{
         flex:6,
