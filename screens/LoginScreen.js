@@ -1,6 +1,7 @@
 import { useNavigation } from '@react-navigation/core'
 import React, { useEffect, useState } from 'react'
-import { KeyboardAvoidingView, Platform, StyleSheet, Text, Image, TextInput, TouchableOpacity, View } from 'react-native'
+import { KeyboardAvoidingView, Platform, StyleSheet, Text, Image, TextInput, TouchableOpacity, View,
+  TouchableWithoutFeedback, Keyboard } from 'react-native'
 import { auth } from '../firebase'
 
 const LoginScreen = () => {
@@ -52,38 +53,41 @@ const LoginScreen = () => {
             source={require('../images/appLogo.png')} />
       </View>
 
-      <View style={styles.body}>
-        <View style={styles.inputContainer}>
-          <TextInput
-              placeholder="Identification (email)"
-              value={email}
-              onChangeText={text => setEmail(text)}
-              style={styles.input}
-          />
-          <TextInput
-              placeholder="Mot de passe"
-              value={password}
-              onChangeText={text => setPassword(text)}
-              style={styles.input}
-              secureTextEntry
-          />
-        </View>
+      <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+        <View style={styles.body}>
+            <View style={styles.inputContainer}>
+              <TextInput
+                  placeholder="Identification (email)"
+                  value={email}
+                  onChangeText={text => setEmail(text)}
+                  style={styles.input}
+              />
+              <TextInput
+                  placeholder="Mot de passe"
+                  value={password}
+                  onChangeText={text => setPassword(text)}
+                  style={styles.input}
+                  secureTextEntry
+              />
+            </View>
 
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity
-              onPress={handleLogin}
-              style={styles.button}
-          >
-            <Text style={styles.buttonText}>Connexion</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-              onPress={handleSignUp}
-              style={[styles.button, styles.buttonOutline]}
-          >
-            <Text style={styles.buttonOutlineText}>Inscription</Text>
-          </TouchableOpacity>
+            <View style={styles.buttonContainer}>
+              <TouchableOpacity
+                  onPress={handleLogin}
+                  style={styles.button}
+              >
+                <Text style={styles.buttonText}>Connexion</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                  onPress={handleSignUp}
+                  style={[styles.button, styles.buttonOutline]}
+              >
+                <Text style={styles.buttonOutlineText}>Inscription</Text>
+              </TouchableOpacity>
+            </View>
         </View>
-      </View>
+      </TouchableWithoutFeedback>
+
     </KeyboardAvoidingView>
   )
 }
