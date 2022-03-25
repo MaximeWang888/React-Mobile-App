@@ -1,16 +1,38 @@
 import { useNavigation } from '@react-navigation/core'
 import React, {useState} from 'react'
-import {KeyboardAvoidingView, Image, Platform, StyleSheet, Text, TouchableOpacity, View, Modal} from 'react-native'
-import { auth } from '../firebase'
-import {ScrollView} from "react-native-web";
+import {
+    KeyboardAvoidingView,
+    Image,
+    Platform,
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+    View,
+    Modal,
+    FlatList
+} from 'react-native'
 import { MaterialIcons } from '@expo/vector-icons';
+import { getRecettes } from "../api/RecettesApi";
+import ReviewForm from "./reviewForm";
 
 const HomeScreen = () => {
     const navigation = useNavigation();
-    const [count, setCount] = useState(0);
     const [modalOpen, setModalOpen] = useState(false);
+    let state = {
+        recetteList: [],
+        currentRecetteItem: null,
+    }
 
-    const onPress = () => setCount(prevCount => prevCount + 1);
+    const onRecettesReceived = (recetteList) => {
+        console.log(recetteList);
+        this.setState(prevState => ({
+            recetteList: prevState.recetteList = recetteList
+        }));
+    }
+
+    function componentDidMount() {
+        getRecettes(onRecettesReceived);
+    }
 
     const handleNavigate2Profile = () => {
         navigation.replace("Profile")
@@ -39,45 +61,35 @@ const HomeScreen = () => {
 
             <View style={styles.body} >
                 <Text style={styles.title}>
-                    Description : {count}
+                    Description
                 </Text>
 
-                {/*<View style={{ flex: 1, borderWidth: 1, height:"100%", weight:"100%" }}>*/}
-                {/*    <Image*/}
-                {/*        source={require("../images/lasagnes.jpg")}*/}
-                {/*        // resizeMode: 'stretch'*/}
-                {/*        style={{height: "100%", width: "100%"}}*/}
-                {/*    />*/}
-                {/*</View>*/}
-                {/*<View style={styles.article1}>*/}
-                {/*    <View style={styles.ImgBrownie}>*/}
-                {/*        <Image*/}
-                {/*            source={require("../images/brownie.jpg")}*/}
-                {/*            style={{width:"100%", height:"80%"}}*/}
-                {/*        />*/}
-                {/*    </View>*/}
-                {/*    <View style={styles.vBrownie}>*/}
-                {/*        <Text style={styles.TitleBrownie}>*/}
-                {/*            Le titre*/}
-                {/*        </Text>*/}
-                {/*        <Text style={styles.descriptionBrownie}>*/}
-                {/*            La description du brownie*/}
-                {/*        </Text>*/}
-                {/*    </View>*/}
-                {/*</View>*/}
-
+                <FlatList
+                    style={{flex:1, borderWidth:1}}
+                    data={state.recetteList}
+                    renderItem={({ item }) => {
+                        console.log(item);
+                        return (
+                            <View style={{borderWidth:10, width:"100%", height:"100%"}}>
+                                <Text>{item.name}</Text>
+                                <Text>{item.description}</Text>
+                            </View>
+                        )
+                    }}
+                    keyExtractor={(item, index) => index.toString()}
+                />
             </View>
 
             <View style={styles.footer}>
                 <Modal visible={modalOpen} animationType="slide">
-                    <MaterialIcons
-                        name="close"
-                        size={40}
-                        onPress={() => setModalOpen(false)}
-                        style={styles.modalClose}
-                    />
-                    <View >
-                        <Text>Le contenu du modal/formulaire</Text>
+                    <View style={{flex:1, height:"100%", weight:"100%", borderWidth:1}}>
+                        <MaterialIcons
+                            name="close"
+                            size={40}
+                            onPress={() => setModalOpen(false)}
+                            style={styles.modalClose}
+                        />
+                        <ReviewForm />
                     </View>
                 </Modal>
 
@@ -145,7 +157,6 @@ const styles = StyleSheet.create({
 
     title: {
         textAlign: 'center',
-        borderWidth: 1,
         height: "10%",
         textAlignVertical: "center",
         fontSize: 20
